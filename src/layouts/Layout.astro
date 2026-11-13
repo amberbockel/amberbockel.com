@@ -1,0 +1,211 @@
+---
+import '../styles/components.css';
+import '../styles/site.css';
+import Logo from '../components/Logo.astro';
+import config from '../site.config.js';
+import { THEMES, systemsCss } from '../systems.js';
+
+const { title, description, current = '', canonical = '', overlay = false } = Astro.props;
+const nav = [['Home', '/'], ['About', '/about/'], ['Work', '/work/'], ['Mentor', '/mentor/'], ['Art', '/art/'], ['Blog', '/blog/']];
+const footNav = [...nav, ['Design systems', '/systems/']];
+const ids = THEMES.map((t) => t.id);
+const year = new Date().getFullYear();
+const swatch = (t) => 'background:linear-gradient(135deg, ' + t.light.bg + ' 50%, ' + t.light.accent + ' 50%)';
+const fontName = (t) => t.fonts.display.split(',')[0].replace(/"/g, '');
+const currentName = THEMES.find((t) => t.id === config.system).name;
+---
+<!doctype html>
+<html lang="en" data-system={config.system}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter+Tight:wght@400;500;600;700&family=Prata&family=DynaPuff:wght@400..700&family=Fredoka:wght@400..700&family=Wix+Madefor+Display:wght@400..800&display=swap" />
+    <style is:inline set:html={systemsCss()}></style>
+    <!-- Applies the saved system and mode before first paint, so there is no flash. -->
+    <script is:inline define:vars={{ ids, allowSwitch: config.showSystemSwitch, fallback: config.system }}>
+      (function () {
+        var r = document.documentElement;
+        r.classList.add('js');
+        if (!r.getAttribute('data-system')) r.setAttribute('data-system', fallback);
+        try {
+          var s = allowSwitch && localStorage.getItem('ab-system');
+          if (s && ids.indexOf(s) > -1) r.setAttribute('data-system', s);
+          if (localStorage.getItem('ab-coach')) r.classList.add('sys-seen');
+          var m = localStorage.getItem('ab-mode') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          r.setAttribute('data-mode', m);
+        } catch (e) { r.setAttribute('data-mode', 'light'); }
+      })();
+    </script>
+  </head>
+  <body class={`ds ${overlay ? "has-overlay" : ""}`}>
+    <header class="site-head">
+      <div class="wrap">
+        <div class="ds-nav">
+          <a class="logo" href="/" aria-label="Amber Bockel, home"><Logo /></a>
+          <nav class="ds-nav__links" id="main-nav" aria-label="Main">
+            {nav.map(([label, href]) => <a class="ds-navlink" href={href} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
+          </nav>
+          <div class="ds-nav__tools">
+            <button class="ds-iconbtn menu-btn" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span></button>
+            {config.showSystemSwitch && (
+            <div class="sysmenu" data-sysmenu>
+              <button class="sysmenu__btn" id="sys-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sys-list" aria-label="Change design system"><span class="sysmenu__dot" aria-hidden="true"></span><span data-sys-name>{currentName}</span></button>
+              <div class="sysmenu__list" id="sys-list" hidden>
+                {THEMES.map((t) => <button type="button" data-system-id={t.id} data-system-name={t.name} aria-pressed="false"><i style={swatch(t)}></i><span>{t.name}<small>{fontName(t)}</small></span></button>)}
+                <a class="sysmenu__more" href="/systems/">How this works<span aria-hidden="true">→</span></a>
+              </div>
+              <div class="coach" id="sys-coach" role="status" hidden><span>This site has four looks. Try another.</span><button type="button" id="coach-close" aria-label="Dismiss">×</button></div>
+            </div>
+            )}
+            <button class="ds-iconbtn" id="mode-toggle" aria-label="Switch between light and dark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" /></svg>
+            </button>
+            <a class="ds-btn ds-btn--primary ds-btn--sm head-cta" href="mailto:amberbockel+website@gmail.com">Say hello</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div class="site-foot__top">
+          <div class="stack">
+            <p class="ds-display h3">I help organizations design how humans and AI make decisions together.</p>
+            <p class="ds-muted" style="margin:0">If you’re looking for guidance, clarity, or a little color for your walls, I’m your person.</p>
+            <div><a class="ds-btn ds-btn--secondary" href="mailto:amberbockel+website@gmail.com">Say hello</a></div>
+          </div>
+          <nav aria-label="Footer">{footNav.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
+        </div>
+        <div class="site-foot__bottom">
+          <span>© {year} Amber Miro Creative. All rights reserved</span>
+          {config.showSystemSwitch && (
+            <div class="sys-switch" role="group" aria-label="Design system">
+              <span>System</span>
+              {THEMES.map((t) => <button type="button" data-system-id={t.id} aria-pressed="false">{t.name}</button>)}
+            </div>
+          )}
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var r = document.documentElement;
+        function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+        function paint() {
+          var b = document.querySelectorAll('[data-system-id]');
+          for (var i = 0; i < b.length; i++) { var on = b[i].getAttribute('data-system-id') === r.getAttribute('data-system'); b[i].setAttribute('aria-pressed', String(on)); if (b[i].hasAttribute('data-wear')) b[i].textContent = (on ? 'Wearing ' : 'Wear ') + b[i].getAttribute('data-wear');
+            if (on && b[i].getAttribute('data-system-name')) { var n = document.querySelector('[data-sys-name]'); if (n) n.textContent = b[i].getAttribute('data-system-name'); } }
+        }
+        document.getElementById('mode-toggle').addEventListener('click', function () {
+          var m = r.getAttribute('data-mode') === 'dark' ? 'light' : 'dark';
+          r.setAttribute('data-mode', m); save('ab-mode', m);
+        });
+        document.addEventListener('click', function (e) {
+          var b = e.target.closest('[data-system-id]'); if (!b) return;
+          r.setAttribute('data-system', b.getAttribute('data-system-id')); save('ab-system', b.getAttribute('data-system-id')); paint(); closeSys();
+          if (window.fitStage) { window.fitStage(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(window.fitStage); setTimeout(window.fitStage, 600); }
+        });
+        var sysBtn = document.getElementById('sys-toggle'), sysList = document.getElementById('sys-list');
+        function closeSys() { if (sysList) { sysList.hidden = true; sysBtn.setAttribute('aria-expanded', 'false'); } }
+        /* A one-time nudge: the switch is easy to miss, so point at it once. */
+        var coach = document.getElementById('sys-coach');
+        function seen() { r.classList.add('sys-seen'); save('ab-coach', '1'); if (coach) coach.hidden = true; }
+        if (coach && !r.classList.contains('sys-seen')) {
+          setTimeout(function () { if (!r.classList.contains('sys-seen')) coach.hidden = false; }, 1800);
+          setTimeout(function () { if (coach) coach.hidden = true; }, 12000);
+          document.getElementById('coach-close').addEventListener('click', function (e) { e.stopPropagation(); seen(); });
+        }
+        if (sysBtn) {
+          sysBtn.addEventListener('click', function (e) { e.stopPropagation(); seen(); sysList.hidden = !sysList.hidden; sysBtn.setAttribute('aria-expanded', String(!sysList.hidden)); });
+          document.addEventListener('click', function (e) { if (!e.target.closest('[data-sysmenu]')) closeSys(); });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSys(); });
+        }
+        paint();
+
+        /* Header: clear over the hero, solid once the page scrolls. */
+        var head = document.querySelector('.site-head');
+        function stick() { head.classList.toggle('is-stuck', window.scrollY > 12); }
+        stick(); window.addEventListener('scroll', stick, { passive: true });
+        var menu = document.getElementById('menu-toggle');
+        function setMenu(open) { head.classList.toggle('is-open', open); menu.setAttribute('aria-expanded', String(open)); menu.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+        menu.addEventListener('click', function () { setMenu(!head.classList.contains('is-open')); });
+        document.getElementById('main-nav').addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+        /* Home stage: the words are sized to fill the width, the hero stays pinned,
+           and the next section slides up over the photo. */
+        var stage = document.querySelector('[data-stage]');
+        if (stage) {
+          var type = stage.querySelector('.stage__type'), first = stage.querySelector('[data-word]');
+          var fit = function () {
+            type.style.fontSize = '';
+            var cs = getComputedStyle(type), room = type.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+            var range = document.createRange(); range.selectNodeContents(first);
+            var size = parseFloat(cs.fontSize) * room / range.getBoundingClientRect().width;
+            type.style.fontSize = Math.min(size, window.innerHeight * .4) + 'px';
+            stage.style.setProperty('--pin', Math.min(0, window.innerHeight - stage.offsetHeight) + 'px');
+          };
+          window.fitStage = fit; fit();
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+          window.addEventListener('resize', fit);
+          if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var tick = false;
+            window.addEventListener('scroll', function () {
+              if (tick) return; tick = true;
+              requestAnimationFrame(function () { stage.style.setProperty('--sp', Math.min(1, window.scrollY / (window.innerHeight * .5)).toFixed(3)); tick = false; });
+            }, { passive: true });
+          }
+        }
+
+        /* Reveal on scroll. Content is visible by default; this only adds the entrance. */
+        var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var items = document.querySelectorAll('[data-reveal]');
+        function countUp(el) {
+          var m = /^(\d+)(.*)$/.exec(el.getAttribute('data-count')); if (!m || calm) return;
+          var to = +m[1], suffix = m[2], t0 = performance.now();
+          (function step(now) { var k = Math.min(1, (now - t0) / 1100), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(to * e) + suffix; if (k < 1) requestAnimationFrame(step); })(t0);
+        }
+        if (!('IntersectionObserver' in window) || calm) { for (var i = 0; i < items.length; i++) items[i].classList.add('is-in'); }
+        else {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (!en.isIntersecting) return;
+              en.target.classList.add('is-in'); io.unobserve(en.target);
+              var c = en.target.querySelectorAll('[data-count]'); for (var j = 0; j < c.length; j++) countUp(c[j]);
+            });
+          }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+          for (var k = 0; k < items.length; k++) io.observe(items[k]);
+        }
+
+        /* Tabs */
+        document.querySelectorAll('[data-tabs]').forEach(function (root) {
+          var tabs = root.querySelectorAll('[role="tab"]'), panels = root.querySelectorAll('[role="tabpanel"]');
+          function show(n) { for (var i = 0; i < tabs.length; i++) { var on = i === n; tabs[i].setAttribute('aria-selected', String(on)); tabs[i].tabIndex = on ? 0 : -1; panels[i].hidden = !on; } }
+          tabs.forEach(function (t, i) {
+            t.addEventListener('click', function () { show(i); });
+            t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length; show(n); tabs[n].focus(); } });
+          });
+        });
+
+        /* Testimonial carousel */
+        document.querySelectorAll('[data-carousel]').forEach(function (root) {
+          var slides = root.querySelectorAll('[data-slide]'), dots = root.querySelectorAll('[data-dot]'), at = 0, timer;
+          function go(n) { at = (n + slides.length) % slides.length; for (var i = 0; i < slides.length; i++) { slides[i].setAttribute('aria-hidden', String(i !== at)); dots[i].setAttribute('aria-current', String(i === at)); } }
+          function auto() { clearInterval(timer); if (!calm) timer = setInterval(function () { go(at + 1); }, 7000); }
+          root.querySelector('[data-next]').addEventListener('click', function () { go(at + 1); auto(); });
+          root.querySelector('[data-prev]').addEventListener('click', function () { go(at - 1); auto(); });
+          dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); auto(); }); });
+          root.addEventListener('mouseenter', function () { clearInterval(timer); }); root.addEventListener('mouseleave', auto);
+          auto();
+        });
+      })();
+    </script>
+  </body>
+</html>
