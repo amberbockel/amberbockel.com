@@ -90,10 +90,9 @@ main { display: block; }
 .cover__text { margin: 0; max-width: 62ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.7; opacity: .92; }
 .cover__btn { display: inline-flex; margin-top: 8px; padding: 16px 44px; border-radius: 999px; background: var(--cover-hi, currentColor); color: var(--cover-bg, var(--ds-primary)); font-weight: 700; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; transition: transform .25s cubic-bezier(.2, .7, .2, 1); }
 .cover__btn:hover { transform: translateY(-3px); }
-/* Sunrise takes every colour here from its own tokens: the lavender-to-pink wash, ink text, pink and green emphasis. */
-:root[data-system="sunrise"] .cover { --cover-bg: var(--ds-hero-bg); --cover-fg: var(--ds-fg); --cover-hi: var(--ds-accent-text); --cover-hi2: var(--ds-label-color); }
-:root[data-system="sunrise"] .cover__btn { background: var(--ds-primary); color: var(--ds-on-primary); }
-:root[data-system="sunrise"] .stage__badge { color: var(--ds-fg); border-color: var(--ds-fg); }
+/* Sunrise: the brand guide's black lockup. Black block, white type, emphasis in orchid, green and teal. */
+:root[data-system="sunrise"] .cover { --cover-bg: #000000; --cover-fg: #ffffff; --cover-hi: #e69ee0; --cover-hi2: #71d45c; }
+:root[data-system="sunrise"] .cover__statement u { text-decoration-color: #b1d9d7; }
 :root[data-system="sierra"] .cover { --cover-bg: #0b0f0c; --cover-fg: #ffffff; --cover-hi: #d7ff5e; --cover-hi2: #74e6d4; }
 :root[data-system="unicorns"] .cover { --cover-bg: #2b1619; --cover-fg: #ffe3f3; --cover-hi: #ff9ee4; --cover-hi2: #f2edc7; }
 :root[data-system="ember"] .cover { --cover-bg: #ff5a2e; --cover-fg: #0f0e0e; --cover-hi: #ffffff; --cover-hi2: #0f0e0e; }
@@ -130,10 +129,10 @@ main { display: block; }
 .stage::before { clip-path: inset(0); }
 :root[data-system="sunrise"] .stage.hero--aurora::before { inset: 0; animation: none; }
 /* Per-system voice for the big words */
-:root[data-system="sunrise"] .stage { --stage-ink: #ffffff; --stage-ink-2: #ffb8d9; }
+:root[data-system="sunrise"] .stage { --stage-ink: #ffffff; --stage-ink-2: #e69ee0; }
 :root[data-system="sunrise"] .stage__type { text-shadow: 0 2px 40px rgba(60, 40, 120, .2); }
 :root[data-system="sunrise"] .stage__note { color: #fff; text-shadow: 0 1px 14px rgba(40, 30, 110, .4); }
-:root[data-system="sunrise"] .stage__note b { color: #ffb8d9; }
+:root[data-system="sunrise"] .stage__note b { color: #e69ee0; }
 :root[data-system="sierra"] .stage__type { letter-spacing: -0.06em; }
 :root[data-system="unicorns"] .stage__type { font-size: clamp(76px, 19.5vw, 290px); line-height: .92; }
 :root[data-system="ember"] .stage__type { letter-spacing: -0.055em; }
@@ -191,7 +190,7 @@ main { display: block; }
 .cta-card .ds-btn--primary { background: var(--ds-on-primary); color: var(--ds-primary); box-shadow: none; }
 :root[data-system="sunrise"] .cta-card { background: none; color: #fff; }
 :root[data-system="sunrise"] .cta-card::before { content: ""; position: absolute; inset: -6%; z-index: -1; background: url("/images/bJGch4JC2ITo6hBgFdE9BmIawbQ.webp") center / cover no-repeat; animation: drift 22s ease-in-out infinite alternate; }
-:root[data-system="sunrise"] .cta-card .ds-btn--primary { background: #fff; color: #1d1d1f; }
+:root[data-system="sunrise"] .cta-card .ds-btn--primary { background: #fff; color: #000; }
 .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: center; font-weight: 600; font-size: 15px; }
 .chips li, .checks li { display: flex; align-items: center; gap: 8px; }
 .chips svg, .checks svg { width: 20px; height: 20px; padding: 3px; border-radius: 999px; background: var(--ds-accent); stroke: var(--ds-bg); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; flex: none; }
