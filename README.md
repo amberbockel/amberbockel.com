@@ -2,6 +2,8 @@
 
 Amber Heinbockel's site, built with Astro as a static site.
 
+Staging: https://staging.amberbockel.com
+
 ## Change the design system
 
 Open `src/site.config.js`:
