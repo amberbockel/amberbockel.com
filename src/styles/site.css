@@ -92,13 +92,13 @@ main { display: block; }
 .cover__btn:hover { transform: translateY(-3px); }
 /* Sunrise: white fading to the brand teal, black type, and a marker stroke under key words
    in the two accents, orchid and green. */
-:root[data-system="sunrise"] .cover { --cover-bg: linear-gradient(180deg, #ffffff 0%, #b1d9d7 100%); --cover-fg: #000000; --cover-hi: #e69ee0; --cover-hi2: #71d45c; }
+:root[data-system="sunrise"] .cover { --cover-bg: linear-gradient(180deg, #ffffff 0%, #eef7f6 100%); --cover-fg: #000000; --cover-hi: #e69ee0; --cover-hi2: #71d45c; }
 :root[data-system="sunrise"] .cover__statement .hi, :root[data-system="sunrise"] .cover__statement u { color: inherit; text-decoration: none; padding: 0 .08em; background: linear-gradient(transparent 58%, var(--cover-hi) 58%, var(--cover-hi) 92%, transparent 92%); }
 :root[data-system="sunrise"] .cover__statement .hi--b { background: linear-gradient(transparent 58%, var(--cover-hi2) 58%, var(--cover-hi2) 92%, transparent 92%); }
 :root[data-system="sunrise"] .cover__btn { background: #000000; color: #ffffff; }
 :root[data-system="sunrise"] .stage__badge { color: #000000; border-color: #000000; }
 /* Dark mode keeps the same idea on black: black fading to a deep teal, white type. */
-:root[data-system="sunrise"][data-mode="dark"] .cover { --cover-bg: linear-gradient(180deg, #000000 0%, #1f3b39 100%); --cover-fg: #ffffff; }
+:root[data-system="sunrise"][data-mode="dark"] .cover { --cover-bg: linear-gradient(180deg, #000000 0%, #0c1716 100%); --cover-fg: #ffffff; }
 :root[data-system="sunrise"][data-mode="dark"] .cover__statement .hi, :root[data-system="sunrise"][data-mode="dark"] .cover__statement u { color: var(--cover-hi); background: none; padding: 0; }
 :root[data-system="sunrise"][data-mode="dark"] .cover__statement .hi--b { color: var(--cover-hi2); background: none; }
 :root[data-system="sunrise"][data-mode="dark"] .cover__statement u { text-decoration: underline; text-decoration-color: var(--cover-hi2); text-decoration-thickness: .07em; text-underline-offset: .14em; }

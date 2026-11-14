@@ -4,7 +4,7 @@ export default {
   system: 'sunrise',
   // Show visitors a control to try the other systems. Turn off to keep the choice yours.
   showSystemSwitch: true,
-  // The password-protected site with confidential work. Linked from the Work page and the footer.
+  // The password-protected site with confidential work. Linked from the Work page only.
   privateWork: {
     url: 'https://amberbockel.pages.dev/',
     email: 'amberbockel+website@gmail.com',
