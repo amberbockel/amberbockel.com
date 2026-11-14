@@ -254,6 +254,13 @@ main { display: block; }
 .media-card img { width: 100%; height: auto; }
 .media-card--wide { max-width: 920px; margin: 36px auto 0; }
 
+/* Private work: a quiet card that points to the password-protected site */
+.private { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px 32px; align-items: center; padding: clamp(24px, 4vw, 44px); border-radius: var(--ds-r-card); background: var(--ds-bg); border: 1px dashed var(--ds-border); }
+.private__icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 999px; background: var(--ds-surface2); }
+.private__icon svg { width: 24px; height: 24px; }
+.private__actions { display: grid; gap: 14px; justify-items: start; }
+@media (max-width: 860px) { .private { grid-template-columns: minmax(0, 1fr); } }
+
 /* Art */
 .illustration { justify-self: center; max-width: 400px; padding: 18px; background: #fff; border-radius: var(--ds-r-card); box-shadow: 0 24px 60px color-mix(in srgb, var(--ds-fg) 10%, transparent); transform: rotate(1.5deg); transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
 .illustration:hover { transform: rotate(0deg) scale(1.02); }

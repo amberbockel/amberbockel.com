@@ -80,7 +80,7 @@ const currentName = THEMES.find((t) => t.id === config.system).name;
             <p class="ds-muted" style="margin:0">If you’re looking for guidance, clarity, or a little color for your walls, I’m your person.</p>
             <div><a class="ds-btn ds-btn--secondary" href="mailto:amberbockel+website@gmail.com">Say hello</a></div>
           </div>
-          <nav aria-label="Footer">{footNav.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
+          <nav aria-label="Footer">{footNav.map(([label, href]) => <a href={href}>{label}</a>)}<a href={config.privateWork.url} target="_blank" rel="noopener">Private work</a></nav>
         </div>
         <div class="site-foot__bottom">
           <span>© {year} Amber Miro Creative. All rights reserved</span>

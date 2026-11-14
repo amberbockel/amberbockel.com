@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
 import { sec, meta, img } from '../lib.js';
 import extra from '../extra.json';
+import config from '../site.config.js';
 
 const hero = sec('work', 'Design in Practice');
 const edge = sec('work', 'Deploy AI');
@@ -75,6 +76,23 @@ const opalText = wear.paras.find((p) => p.startsWith('Opal is')) || opal.paras[0
         <div>{deck.links.map((l) => <a class="arrow-link" href={l.href}>{l.label}<span aria-hidden="true">→</span></a>)}</div>
       </div>
       <div class="media-card" data-reveal style="--d:.1s"><img src={img('BLiYDRqXVbjVVQnHyLpbTuv8.gif')} alt="Slides from Amber’s design leadership deck" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap">
+      <div class="private" data-reveal>
+        <div class="private__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg></div>
+        <div class="stack" style="gap:10px">
+          <p class="eyebrow">Private work</p>
+          <h2 class="ds-display h3">More work, shared on request</h2>
+          <p class="lede">Some projects are under confidentiality. If I’ve sent you a password, you can view them here. You’ll be asked for it on the next page.</p>
+        </div>
+        <div class="private__actions">
+          <a class="ds-btn ds-btn--primary" href={config.privateWork.url} target="_blank" rel="noopener">View private work</a>
+          <a class="arrow-link" href={`mailto:${config.privateWork.email}?subject=Access%20to%20private%20work`}>Request access<span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
