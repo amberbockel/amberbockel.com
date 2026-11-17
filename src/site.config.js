@@ -9,6 +9,10 @@ export default {
     url: 'https://amberbockel.pages.dev/',
     email: 'amberbockel+website@gmail.com',
   },
+  // The nightly agent experiments site. Linked from the footer.
+  experiments: {
+    url: 'https://amberbockel.github.io/agent-experiments/',
+  },
   blog: {
     substack: 'https://amberbockel.substack.com',
     // Which copy of an essay search engines should credit: 'substack' or 'site'.
