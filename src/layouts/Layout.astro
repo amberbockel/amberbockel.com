@@ -146,9 +146,11 @@ const currentName = THEMES.find((t) => t.id === config.system).name;
           var type = stage.querySelector('.stage__type'), first = stage.querySelector('[data-word]');
           var fit = function () {
             type.style.fontSize = '';
-            var cs = getComputedStyle(type), room = type.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-            var range = document.createRange(); range.selectNodeContents(first);
-            var size = parseFloat(cs.fontSize) * room / range.getBoundingClientRect().width;
+            // Measure against the stage, not the headline box, which stretches with a long word.
+            var cs = getComputedStyle(type), room = type.parentElement.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+            var widest = 0, ws = stage.querySelectorAll('[data-word]');
+            for (var i = 0; i < ws.length; i++) { var range = document.createRange(); range.selectNodeContents(ws[i]); widest = Math.max(widest, range.getBoundingClientRect().width); }
+            var size = parseFloat(cs.fontSize) * room / widest;
             type.style.fontSize = Math.min(size, window.innerHeight * .4) + 'px';
             stage.style.setProperty('--pin', Math.min(0, window.innerHeight - stage.offsetHeight) + 'px');
           };
