@@ -50,6 +50,11 @@ images. `python3 scripts/optimize-images.py` then shrinks the images (needs Pill
 `blog.canonical` in `src/site.config.js` decides which copy search engines credit: `'substack'` (default)
 or `'site'`.
 
+## Lab
+
+`npm run experiments` reads the agent experiments site's manifest into `src/experiments.json`: the count
+and the three latest builds. The Lab feature on Home and Work shows them.
+
 ## Deploy
 
 Every push to `main` builds and deploys with GitHub Pages (`.github/workflows/deploy.yml`). The same
@@ -61,6 +66,5 @@ engines while on staging.
 
 ## Not done yet
 
-- The Lab page from the old site is not ported.
 - The Design Leadership tab on About reuses the home page copy.
 - Three animated GIFs in essays are 2 to 8 MB each and should become video.

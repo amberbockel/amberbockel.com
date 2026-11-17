@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
+import Experiments from '../components/Experiments.astro';
 import Monogram from '../components/Monogram.astro';
 import { sec, meta, img } from '../lib.js';
 import extra from '../extra.json';
@@ -93,6 +94,8 @@ const fmt = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { year
       </div>
     </div>
   </section>
+
+  <Experiments />
 
   <Cta />
 </Layout>

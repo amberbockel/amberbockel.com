@@ -254,6 +254,21 @@ main { display: block; }
 .media-card img { width: 100%; height: auto; }
 .media-card--wide { max-width: 920px; margin: 36px auto 0; }
 
+/* Lab: the nightly experiments feature, on Home and Work */
+.lab { display: grid; gap: 32px; padding: clamp(28px, 5vw, 56px); border-radius: calc(var(--ds-r-card) + 4px); background: #0e1016; color: #ffffff; }
+.lab .eyebrow { color: #e9c46a; letter-spacing: .14em; text-transform: uppercase; }
+.lab .lede { color: #ffffffb8; }
+.lab__head { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: end; }
+.lab__stat { display: grid; gap: 4px; }
+.lab__stat b { font-size: calc(clamp(44px, 6vw, 76px) * var(--ds-display-scale)); line-height: 1; color: #e9c46a; font-variant-numeric: tabular-nums; }
+.lab__stat span { color: #ffffffb8; font-size: 15px; }
+.lab__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.lab__list a { display: grid; gap: 8px; align-content: start; height: 100%; padding: 20px; border-radius: var(--ds-r-card); border: 1px solid #ffffff26; text-decoration: none; color: inherit; transition: transform .3s cubic-bezier(.2, .7, .2, 1), border-color .3s, background-color .3s; }
+.lab__list a:hover { transform: translateY(-4px); border-color: #e9c46a; background: #ffffff0a; }
+.lab__list b { font-size: calc(22px * var(--ds-display-scale)); line-height: 1.15; }
+.lab__meta { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #e9c46a; }
+.lab__text { font-size: 15px; line-height: 1.5; color: #ffffffb8; }
+
 /* Private work: a quiet card that points to the password-protected site */
 .private { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px 32px; align-items: center; padding: clamp(24px, 4vw, 44px); border-radius: var(--ds-r-card); background: var(--ds-bg); border: 1px dashed var(--ds-border); }
 .private__icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 999px; background: var(--ds-surface2); }

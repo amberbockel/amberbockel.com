@@ -1,0 +1,30 @@
+---
+import data from '../experiments.json';
+// Round down so the number never overstates between daily rebuilds.
+const shipped = Math.floor(data.count / 10) * 10;
+const fmt = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+---
+<section class="section">
+  <div class="wrap">
+    <div class="lab" data-reveal>
+      <div class="lab__head">
+        <div class="stack" style="gap:12px">
+          <p class="eyebrow">Lab</p>
+          <h2 class="ds-display h2">A new experiment, every night</h2>
+          <p class="lede">Part playground, part product lab. My agents and I build one small, playable thing a night, so I learn what building with AI is really like.</p>
+        </div>
+        <div class="lab__stat"><b class="ds-display" data-count={`${shipped}+`}>{shipped}+</b><span>experiments shipped</span></div>
+      </div>
+      <ul class="lab__list">
+        {data.latest.map((x, i) => (
+          <li><a href={x.url}>
+            <span class="lab__meta">{i === 0 ? 'Latest' : fmt(x.date)}{x.category && ` · ${x.category}`}</span>
+            <b class="ds-display">{x.title}</b>
+            <span class="lab__text">{x.text}</span>
+          </a></li>
+        ))}
+      </ul>
+      <div><a class="ds-btn ds-btn--primary" href={data.url}>See all experiments</a></div>
+    </div>
+  </div>
+</section>

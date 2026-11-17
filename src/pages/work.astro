@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
+import Experiments from '../components/Experiments.astro';
 import { sec, meta, img } from '../lib.js';
 import extra from '../extra.json';
 import config from '../site.config.js';
@@ -78,6 +79,8 @@ const opalText = wear.paras.find((p) => p.startsWith('Opal is')) || opal.paras[0
       <div class="media-card" data-reveal style="--d:.1s"><img src={img('BLiYDRqXVbjVVQnHyLpbTuv8.gif')} alt="Slides from Amber’s design leadership deck" loading="lazy" /></div>
     </div>
   </section>
+
+  <Experiments />
 
   <section class="section section--tint">
     <div class="wrap">

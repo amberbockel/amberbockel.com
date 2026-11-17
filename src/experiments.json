@@ -1,0 +1,27 @@
+{
+ "url": "https://amberbockel.github.io/agent-experiments/",
+ "count": 74,
+ "latest": [
+  {
+   "title": "Rerun",
+   "text": "Draw walls, then watch 36 simulated agents fail, remember, and get better with every run.",
+   "category": "delightful",
+   "date": "2026-11-16",
+   "url": "https://amberbockel.github.io/agent-experiments/apps/2026-11-16/"
+  },
+  {
+   "title": "Press On",
+   "text": "A pass-and-play push-your-luck card game where a live bust-odds meter turns every flip into a probability lesson.",
+   "category": "games",
+   "date": "2026-11-15",
+   "url": "https://amberbockel.github.io/agent-experiments/apps/2026-11-15/"
+  },
+  {
+   "title": "Trigger Words",
+   "text": "Write the one-line description that makes an AI agent load your skill at the right moment, and only then.",
+   "category": "trend",
+   "date": "2026-11-14",
+   "url": "https://amberbockel.github.io/agent-experiments/apps/2026-11-14/"
+  }
+ ]
+}
