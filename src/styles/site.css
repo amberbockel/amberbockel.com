@@ -139,6 +139,12 @@ main { display: block; }
 .stage { overflow-x: clip; overflow-y: visible; }
 .stage::before { clip-path: inset(0); }
 :root[data-system="sunrise"] .stage.hero--aurora::before { inset: 0; animation: none; }
+/* Sunrise's moving background: silky ribbons drawn on a canvas. The still image stays underneath as a fallback. */
+.stage__flow { display: none; position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; opacity: 0; transition: opacity 1.2s ease; }
+:root[data-system="sunrise"] .stage__flow { display: block; }
+.stage__flow.is-on { opacity: 1; }
+:root[data-system="sunrise"][data-mode="dark"] .stage__flow { filter: brightness(.55) saturate(1.2); }
+
 /* Per-system voice for the big words */
 :root[data-system="sunrise"] .stage { --stage-ink: #ffffff; --stage-ink-2: #e69ee0; }
 /* The plus keeps the bold pink from the original Sunrise, the one colour here outside the brand guide. */
