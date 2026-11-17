@@ -2,7 +2,7 @@
 
 Amber Heinbockel's site, built with Astro as a static site.
 
-Staging: https://staging.amberbockel.com
+Live at https://amberbockel.com
 
 ## Change the design system
 
@@ -60,9 +60,7 @@ and the three latest builds. The Lab feature on Home and Work shows them.
 Every push to `main` builds and deploys with GitHub Pages (`.github/workflows/deploy.yml`). The same
 workflow runs once a day to pick up new essays.
 
-The site is on a staging address for now. To move it to amberbockel.com, change three things together:
-`site` in `astro.config.mjs`, the domain in `public/CNAME`, and `public/robots.txt`, which blocks search
-engines while on staging.
+The custom domain is set in the repository's Pages settings, not by `public/CNAME`.
 
 ## Not done yet
 
