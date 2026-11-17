@@ -141,6 +141,8 @@ main { display: block; }
 :root[data-system="sunrise"] .stage.hero--aurora::before { inset: 0; animation: none; }
 /* Per-system voice for the big words */
 :root[data-system="sunrise"] .stage { --stage-ink: #ffffff; --stage-ink-2: #e69ee0; }
+/* The plus keeps the bold pink from the original Sunrise, the one colour here outside the brand guide. */
+:root[data-system="sunrise"] .stage__plus { color: #e01a8a; }
 :root[data-system="sunrise"] .stage__type { text-shadow: 0 2px 40px rgba(60, 40, 120, .2); }
 :root[data-system="sunrise"] .stage__note { color: #fff; text-shadow: 0 1px 14px rgba(40, 30, 110, .4); }
 :root[data-system="sunrise"] .stage__note b { color: #e69ee0; }
