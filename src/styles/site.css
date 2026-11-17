@@ -168,8 +168,8 @@ main { display: block; }
 :root[data-system="unicorns"]:not([data-mode="dark"]) .marquee img { filter: grayscale(1) brightness(.3); opacity: .7; }
 @keyframes marquee { to { transform: translateX(calc(-100% / 3)); } }
 
-/* Sunrise's surfaces are white, so the grid sits on a pale blue band to let its white tiles stand out. */
-:root[data-system="sunrise"]:not([data-mode="dark"]) .stage ~ .band { background-color: #e6f1f0; }
+/* Sunrise: the grid sits on the bold aurora gradient, so its white tiles stand out. Both modes. */
+:root[data-system="sunrise"] .stage ~ .band { background: url("/images/bJGch4JC2ITo6hBgFdE9BmIawbQ.webp") center / cover no-repeat; }
 
 /* Home mosaic: a checkerboard of text and square images */
 .mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 820px; margin: 0 auto; border-radius: var(--ds-r-card); overflow: hidden; }
