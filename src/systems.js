@@ -10,13 +10,14 @@ export const THEMES = [
     status: 'v0.1.0',
     fonts: { display: '"Prata", Georgia, serif', body: '"DM Sans", system-ui, sans-serif' },
     shape: { rCard: '20px', rCtl: '12px', rBtn: '999px', rImg: '14px', rProd: '20px', displayWeight: '400', displayLs: '-0.01em', displayLh: '1.12', displayScale: '1.1' },
-    // Colours come from the brand guide: black, white, cream #fbf8ef, green #71d45c, orchid #e69ee0, teal #b1d9d7.
+    // Colours come from the brand guide: black, white, green #71d45c, orchid #e69ee0, teal #b1d9d7.
+    // Tinted surfaces use a very light grey-blue in place of the guide's cream, at Amber's request.
     light: {
-      bg: '#ffffff', surface: '#fbf8ef', surface2: '#f3eedf', fg: '#000000', muted: '#000000a6', border: '#0000001f',
+      bg: '#ffffff', surface: '#f5f8fa', surface2: '#e9eff3', fg: '#000000', muted: '#000000a6', border: '#0000001f',
       primary: '#71d45c', onPrimary: '#ffffff', labelColor: '#000000', btn2Bg: '#ffffff', btn2Border: '#00000026',
       accent: '#e69ee0', accentSoft: '#e69ee040', accentText: '#000000',
       t1Bg: '#b1d9d7', t1Fg: '#000000', t2Bg: '#e69ee0', t2Fg: '#000000', t3Bg: '#71d45c', t3Fg: '#000000',
-      art1: '#fbf8ef', art2: '#b1d9d7', art3: '#e69ee0',
+      art1: '#f5f8fa', art2: '#b1d9d7', art3: '#e69ee0',
       heroBg: 'linear-gradient(180deg, #b1d9d7 0%, #e69ee080 55%, #ffffff 100%)',
     },
     dark: {
