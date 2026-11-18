@@ -16,7 +16,7 @@ const person = {
   url: Astro.site.href, image: new URL('/og.jpg', Astro.site).href,
   jobTitle: 'Design Leader', description: 'AI-focused UX design leader, mentor and artist.',
   knowsAbout: ['AI UX', 'Design leadership', 'Human-AI collaboration', 'Product design', 'Design systems'],
-  sameAs: [config.blog.substack, 'https://github.com/amberbockel', 'https://ambermiro.com/'],
+  sameAs: ['https://www.linkedin.com/in/amberbockel/', config.blog.substack, 'https://github.com/amberbockel', 'https://ambermiro.com/'],
 };
 const site = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Amber Miro Heinbockel', url: Astro.site.href, author: { '@id': Astro.site + '#amber' } };
 const graphs = [person, ...(current === '/' ? [site] : []), ...(schema ? [schema] : [])];
