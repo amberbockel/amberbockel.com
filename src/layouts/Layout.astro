@@ -5,7 +5,21 @@ import Logo from '../components/Logo.astro';
 import config from '../site.config.js';
 import { THEMES, systemsCss } from '../systems.js';
 
-const { title, description, current = '', canonical = '', overlay = false } = Astro.props;
+const { title, description, current = '', canonical = '', overlay = false, image = '/og.jpg', type = 'website', noindex = false, schema = null } = Astro.props;
+// Every page names its own address unless it hands the credit elsewhere (essays point at Substack).
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const canonicalUrl = canonical || pageUrl;
+const imageUrl = new URL(image, Astro.site).href;
+const person = {
+  '@context': 'https://schema.org', '@type': 'Person', '@id': Astro.site + '#amber',
+  name: 'Amber Miro Heinbockel', alternateName: ['Amber Heinbockel', 'Amber Bockel', 'Amber Miro'],
+  url: Astro.site.href, image: new URL('/og.jpg', Astro.site).href,
+  jobTitle: 'Design Leader', description: 'AI-focused UX design leader, mentor and artist.',
+  knowsAbout: ['AI UX', 'Design leadership', 'Human-AI collaboration', 'Product design', 'Design systems'],
+  sameAs: [config.blog.substack, 'https://github.com/amberbockel', 'https://ambermiro.com/'],
+};
+const site = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Amber Miro Heinbockel', url: Astro.site.href, author: { '@id': Astro.site + '#amber' } };
+const graphs = [person, ...(current === '/' ? [site] : []), ...(schema ? [schema] : [])];
 const nav = [['Home', '/'], ['About', '/about/'], ['Work', '/work/'], ['Mentor', '/mentor/'], ['Art', '/art/'], ['Blog', '/blog/']];
 const footNav = [...nav, ['Design systems', '/systems/']];
 const ids = THEMES.map((t) => t.id);
@@ -21,8 +35,31 @@ const currentName = THEMES.find((t) => t.id === config.system).name;
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="author" content="Amber Miro Heinbockel" />
+    <meta property="og:site_name" content="Amber Miro Heinbockel" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={imageUrl} />
+    {image === '/og.jpg' && <meta property="og:image:width" content="1200" />}
+    {image === '/og.jpg' && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    {graphs.map((g) => <script is:inline type="application/ld+json" set:html={JSON.stringify(g)} />)}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter+Tight:wght@400;500;600;700&family=Prata&family=DynaPuff:wght@400..700&family=Fredoka:wght@400..700&family=Wix+Madefor+Display:wght@400..800&display=swap" />
     <style is:inline set:html={systemsCss()}></style>
     <!-- Applies the saved system and mode before first paint, so there is no flash. -->

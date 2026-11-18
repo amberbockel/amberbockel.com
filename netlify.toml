@@ -1,9 +1,0 @@
-# Build settings for Netlify. Same steps as the GitHub workflow.
-# Fetching essays, experiments and image optimisation may fail without failing the build:
-# the committed copies are used instead.
-[build]
-  command = "(npm run posts || true) && (npm run experiments || true) && ((pip install --quiet pillow && python3 scripts/optimize-images.py) || true) && npm run build"
-  publish = "dist"
-
-[build.environment]
-  NODE_VERSION = "22"

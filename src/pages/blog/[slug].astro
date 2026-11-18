@@ -9,8 +9,14 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 const fmt = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const canonical = config.blog.canonical === 'substack' ? post.source : new URL(`/blog/${post.slug}/`, Astro.site).href;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.title, description: post.summary,
+  datePublished: post.date, mainEntityOfPage: canonical,
+  ...(post.cover ? { image: new URL(post.cover, Astro.site).href } : {}),
+  author: { '@id': Astro.site + '#amber' },
+};
 ---
-<Layout title={`${post.title} | Amber Miro Heinbockel`} description={post.summary} current="/blog/" canonical={canonical}>
+<Layout title={`${post.title} | Amber Miro Heinbockel`} description={post.summary || post.title} current="/blog/" canonical={canonical} image={post.cover || '/og.jpg'} type="article" schema={schema}>
   <div class="wrap">
     <article class="article">
       <header class="article__head">
